@@ -229,7 +229,7 @@ returns the stats without the array crossing context.
 
 - STDIO upstream only; one process = one result scope (no multi-user mode).
 - JSON and text virtualization only — images/audio/binary pass through.
-- No CSV/row operations, no streaming, no cross-hose shared refs.
+- No CSV/row operations, no streaming, no cross-host shared refs.
 - Storage pressure fails loudly instead of evicting (`StorageLimitError`); no LRU.
 - No `save_result(path=...)` by design (avoids path-traversal policy).
 
