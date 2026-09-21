@@ -39,9 +39,35 @@ producer step; the final stats response is 60 B.
 
 ## Installation
 
-Requires Python 3.11+ and [uv](https://docs.astral.sh/uv/).
+Requires Python 3.11+.
+
+**Try it without installing** (needs [uv](https://docs.astral.sh/uv/)):
 
 ```bash
+uvx toolpipe serve
+```
+
+**Install as a tool:**
+
+```bash
+pipx install toolpipe        # isolated CLI: `toolpipe serve`
+# or
+uv tool install toolpipe     # uv equivalent
+```
+
+**Install into a project:**
+
+```bash
+pip install toolpipe
+# or
+uv add toolpipe
+```
+
+**From source** (development):
+
+```bash
+git clone https://github.com/kunalkaul/toolpipe
+cd toolpipe
 uv sync
 uv run toolpipe --help
 ```
@@ -110,18 +136,21 @@ GITHUB_TOKEN = "${GITHUB_TOKEN}"
 
 ### MCP client config (generic Claude/Cursor/Codex style)
 
-Plug-and-play entry — no config file:
+Plug-and-play entry — no config file, no local checkout:
 
 ```json
 {
   "mcpServers": {
     "toolpipe": {
-      "command": "toolpipe",
-      "args": ["serve"]
+      "command": "uvx",
+      "args": ["toolpipe", "serve"]
     }
   }
 }
 ```
+
+If `uvx` cold-start latency matters, `pipx install toolpipe` (or
+`uv tool install toolpipe`) and use `"command": "toolpipe"` instead.
 
 Pinned-config entry:
 
