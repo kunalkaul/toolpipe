@@ -1,0 +1,34 @@
+# Example ToolPipe configuration.
+#
+# Run with:
+#   toolpipe serve --config examples/toolpipe.toml
+#
+# The demo servers live in examples/demo/. For GitHub-style servers needing
+# secrets, use ${VAR} substitution (fails fast if the variable is unset):
+#
+#   [servers.github]
+#   command = "npx"
+#   args = ["-y", "@example/github-mcp"]
+#
+#   [servers.github.env]
+#   GITHUB_TOKEN = "${GITHUB_TOKEN}"
+
+[toolpipe]
+name = "ToolPipe"
+
+[results]
+storage_dir = ".toolpipe"
+inline_max_bytes = 32768
+preview_max_bytes = 4096
+read_max_bytes = 16384
+max_result_bytes = 104857600
+max_store_bytes = 1073741824
+ttl_seconds = 3600
+
+[servers.producer]
+command = "uv"
+args = ["run", "python", "examples/demo/producer_mcp.py"]
+
+[servers.analytics]
+command = "uv"
+args = ["run", "python", "examples/demo/analytics_mcp.py"]
